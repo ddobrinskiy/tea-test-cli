@@ -1,0 +1,24 @@
+
+
+name: CI
+on:
+  workflow_dispatch: #allows repo admins to trigger this workflow from the Actions tab
+  pull_request:
+  push:
+    branches:
+      - master
+
+permissions:
+  contents: read # to fetch code (actions/checkout)
+
+jobs:
+  test-pip:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up pip
+      - uses: teaxyz/setup@v0
+        with:
+          +: |
+            pip.pypa.io
+      run: |
+        pip install -Uq pandas
